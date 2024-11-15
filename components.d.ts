@@ -8,7 +8,5 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ConferenceApp: typeof import('./src/components/ConferenceApp.vue')['default']
-    NavbarApp: typeof import('./src/components/Layout/NavbarApp.vue')['default']
-    RegisterApp: typeof import('./src/components/Auth/RegisterApp.vue')['default']
   }
 }
