@@ -54,21 +54,21 @@ const conferenceData = {
       title: "Avances en Inteligencia Artificial",
       abstract: "Este trabajo presenta los últimos avances en el campo de la Inteligencia Artificial, incluyendo nuevos algoritmos de aprendizaje profundo y sus aplicaciones en diversos sectores como la salud, la industria y la educación.",
       authors: ["Dr. Juan Pérez", "Dra. María García"],
-      image: "/src/assets/img/inteligencia-artificial.jpg"
+      image: "/public/img/inteligencia-artificial.jpg"
     },
     {
       id: 2,
       title: "Nuevas Técnicas en Aprendizaje Profundo",
       abstract: "Exploramos las técnicas más recientes en el campo del aprendizaje profundo, con un enfoque especial en las redes neuronales convolucionales y su aplicación en el procesamiento de imágenes médicas para la detección temprana de enfermedades.",
       authors: ["Dr. Carlos Rodríguez"],
-      image: "/src/assets/img/deep-learning.jpeg"
+      image: "/public/img/deep-learning.jpeg"
     },
     {
       id: 3,
       title: "Aplicaciones de la Computación Cuántica",
       abstract: "Este trabajo examina las aplicaciones emergentes de la computación cuántica en diversos campos, desde la criptografía hasta la simulación de sistemas moleculares complejos.",
       authors: ["Dra. Laura Martínez", "Dr. Alejandro Gómez"],
-      image: "/src/assets/img/computacion-cuantica.jpg"
+      image: "/public/img/computacion-cuantica.jpg"
     }
   ],
   sessions: [
@@ -82,13 +82,13 @@ const conferenceData = {
           id: 1,
           title: "Avances en Inteligencia Artificial",
           presenter: "Dr. Juan Pérez",
-          presenterImage: "/src/assets/img/peterNorving.png"
+          presenterImage: "/public/img/peterNorving.png"
         },
         {
           id: 2,
           title: "Aplicaciones de la IA en la Medicina",
           presenter: "Dra. Ana Martínez",
-          presenterImage: "/src/assets/img/breazeal.jpg"
+          presenterImage: "/public/img/breazeal.jpg"
         }
       ]
     },
@@ -102,7 +102,7 @@ const conferenceData = {
           id: 3,
           title: "Nuevas Técnicas en Aprendizaje Profundo",
           presenter: "Dr. Ramón Lopez",
-          presenterImage: "/src/assets/img/ramon-lopez.jpg"
+          presenterImage: "/public/img/ramon-lopez.jpg"
         }
       ]
     },
@@ -116,7 +116,7 @@ const conferenceData = {
           id: 4,
           title: "Aplicaciones de la Computación Cuántica",
           presenter: "Dra. Kate CrawFord",
-          presenterImage: "/src/assets/img/Kate-Crawford.jpg"
+          presenterImage: "/public/img/Kate-Crawford.jpg"
         }
       ]
     }
@@ -127,21 +127,21 @@ const conferenceData = {
       name: "Dr. Peter Norving",
       title: "Investigador Principal en IA",
       experience: "20+ años en investigación de Inteligencia Artificial",
-      image: "/src/assets/img/peterNorving.png"
+      image: "/public/img/peterNorving.png"
     },
     {
       id: 2,
       name: "Dra. Cinthya Breazeal",
       title: "Experta en Aprendizaje Profundo",
       experience: "Pionera en aplicaciones de IA en medicina",
-      image: "/src/assets/img/breazeal.jpg"
+      image: "/public/img/breazeal.jpg"
     },
     {
       id: 3,
       name: "Dr. Ramón Lopez",
       title: "Científico de Datos Senior",
       experience: "Líder en proyectos de Big Data y Machine Learning",
-      image: "/src/assets/img/ramon-lopez.jpg"
+      image: "/public/img/ramon-lopez.jpg"
     }
   ]
 }
@@ -190,7 +190,7 @@ const featuredSpeakers = computed(() => {
 
         <div class="flex items-center space-x-6">
           <div class="bg-white p-2 rounded-lg">
-            <img src="../assets/img/atomo.png" alt="Logo de la conferencia"
+            <img src="/public/img/atomo.png" alt="Logo de la conferencia"
               class="w-14 h-14 transition-transform duration-1000 hover:rotate-[359deg]">
           </div>
           <h2 class="text-2xl font-bold hidden md:block">Conferencia Científica 2024</h2>
@@ -204,7 +204,7 @@ const featuredSpeakers = computed(() => {
           <div class="relative">
             <button @click="toggleConfigMenu"
               class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-500 transition-colors duration-200">
-              <img src="../assets/img/stting.png" alt="Logo de la conferencia" class="w-12 h-12">
+              <img src="/public/img/stting.png" alt="Logo de la conferencia" class="w-12 h-12">
             </button>
             <div v-if="showConfigMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
               <div class="py-1">
@@ -217,7 +217,7 @@ const featuredSpeakers = computed(() => {
           </div>
         </div>
         <button @click="toggleMobileMenu" class="md:hidden z-50 relative">
-          <img src="../assets/img/menu.png" alt="Logo de la conferencia" class="w-12 h-14">
+          <img src="/public/img/menu.png" alt="Logo de la conferencia" class="w-12 h-14">
         </button>
       </div>
       <div v-if="showMobileMenu"
@@ -256,7 +256,7 @@ const featuredSpeakers = computed(() => {
               en tu campo.
             </p>
           </div>
-          <img src="../assets/img/estudiante-ciencia.png" alt="Cientifico"
+          <img src="/public/img/estudiante-ciencia.png" alt="Cientifico"
             class="w-8/12 md:w-5/12 md:order-2 slidedown-science">
         </div>
 
