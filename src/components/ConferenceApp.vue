@@ -6,6 +6,7 @@ const showConfigMenu = ref(false)
 const paperSearch = ref('')
 const sessionSearch = ref('')
 const showMobileMenu = ref(false)
+const showNewSessionModal = ref(false)
 
 const navSections = [
   { id: 'inicio', name: 'Inicio' },
@@ -25,6 +26,24 @@ const loginData = reactive({
   email: '',
   password: ''
 })
+
+const newSession = reactive({
+  room: '',
+  time: '',
+  chairman: ''
+})
+
+const createNewSession = () => {
+  const newId = Math.max(...conferenceData.sessions.map(s => s.id)) + 1
+  const session = {
+    id: newId,
+    ...newSession,
+    presentations: []
+  }
+  conferenceData.sessions.push(session)
+  showNewSessionModal.value = false
+  Object.keys(newSession).forEach(key => newSession[key] = '')
+}
 
 const toggleConfigMenu = () => {
   showConfigMenu.value = !showConfigMenu.value
@@ -190,7 +209,7 @@ const featuredSpeakers = computed(() => {
 
         <div class="flex items-center space-x-6">
           <div class="bg-white p-2 rounded-lg">
-            <img src="/img/atomo.png" alt="Logo de la conferencia"
+            <img src="/img/atomo.png" alt="Atomo"
               class="w-14 h-14 transition-transform duration-1000 hover:rotate-[359deg]">
           </div>
           <h2 class="text-2xl font-bold hidden md:block">Conferencia Científica 2024</h2>
@@ -204,7 +223,7 @@ const featuredSpeakers = computed(() => {
           <div class="relative">
             <button @click="toggleConfigMenu"
               class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-500 transition-colors duration-200">
-              <img src="/img/stting.png" alt="Logo de la conferencia" class="w-12 h-12">
+              <img src="/img/stting.png" alt="Settings" class="w-12 h-12">
             </button>
             <div v-if="showConfigMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
               <div class="py-1">
@@ -217,7 +236,7 @@ const featuredSpeakers = computed(() => {
           </div>
         </div>
         <button @click="toggleMobileMenu" class="md:hidden z-50 relative">
-          <img src="/img/menu.png" alt="Logo de la conferencia" class="w-12 h-14">
+          <img src="/img/menu.png" alt="Menu" class="w-12 h-14">
         </button>
       </div>
       <div v-if="showMobileMenu"
@@ -381,7 +400,13 @@ const featuredSpeakers = computed(() => {
 
       <!-- Sesiones del Congreso -->
       <div v-if="currentSection === 'sesiones'" class="bg-white shadow-md rounded-lg p-6 mt-8">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Sesiones del Congreso</h2>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Sesiones del Congreso</h2>
+          <button @click="showNewSessionModal = true" class="bg-blue-500 text-white px-1 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            <img src="/public/img/plus.png" alt="Mas Sesiones" class="w-10 h-10" />
+          </button>
+        </div>
+
         <div class="mb-4">
           <input v-model="sessionSearch" type="text" placeholder="Buscar sesiones..."
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
@@ -414,6 +439,35 @@ const featuredSpeakers = computed(() => {
           </div>
         </div>
       </div>
+
+      <!-- Modal para crear nueva sesión -->
+    <div v-if="showNewSessionModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md">
+        <h3 class="text-xl font-semibold mb-4">Crear Nueva Sesión</h3>
+        <form @submit.prevent="createNewSession">
+          <div class="mb-4">
+            <label for="room" class="block text-sm font-medium text-gray-700">Sala</label>
+            <input v-model="newSession.room" type="text" id="room" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+          </div>
+          <div class="mb-4">
+            <label for="time" class="block text-sm font-medium text-gray-700">Hora</label>
+            <input v-model="newSession.time" type="text" id="time" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+          </div>
+          <div class="mb-4">
+            <label for="chairman" class="block text-sm font-medium text-gray-700">Chairman</label>
+            <input v-model="newSession.chairman" type="text" id="chairman" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button type="button" @click="showNewSessionModal = false" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              Cancelar
+            </button>
+            <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              Crear Sesión
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     </div>
   </div>
 </template>
